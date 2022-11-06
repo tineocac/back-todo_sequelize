@@ -1,5 +1,6 @@
 const express = require("express");
 const db = require("./utils/database");
+const initModels = require("./models/initModels");
 
 const app = express();
 
@@ -12,6 +13,8 @@ db.authenticate()
 db.sync()
   .then(() => console.log("Successful synchronization"))
   .catch((error) => console.log(error));
+
+initModels();
 
 app.get("/", (req, res) => res.status(200).json("Getting data"));
 

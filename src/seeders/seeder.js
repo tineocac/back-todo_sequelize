@@ -12,9 +12,9 @@ const users = [
 ];
 
 const address = [
-  { street: "Calle 1", number: 5, user_id: 1 },
-  { street: "Calle 2", number: 3, user_id: 2 },
-  { street: "Calle 3", number: 10, user_id: 3 },
+  { street: "Calle 1", number: 5, userId: 1 },
+  { street: "Calle 2", number: 3, userId: 2 },
+  { street: "Calle 3", number: 10, userId: 3 },
 ];
 
 const tasks = [
@@ -25,7 +25,7 @@ const tasks = [
 
 const categories = [{ name: "Hogar" }, { name: "Tecno" }, { name: "Trabajo" }];
 
-db.sync({ force: false })
+db.sync()
   .then(() => {
     console.log("Creating users");
     users.forEach((user) => Users.create(user));

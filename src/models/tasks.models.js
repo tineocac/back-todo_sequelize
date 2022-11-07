@@ -19,6 +19,15 @@ const Tasks = db.define("tasks", {
     type: DataTypes.BOOLEAN,
     defaultValue: false,
   },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      key: "id",
+      model: "users",
+    },
+    field: "user_id",
+  },
 });
 
 module.exports = Tasks;

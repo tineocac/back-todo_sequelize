@@ -3,15 +3,15 @@ const db = require("./utils/database");
 const initModels = require("./models/initModels");
 const usersRouter = require("./routes/users.routes");
 require("dotenv").config();
-const logs = require('./middlewares/requestLogs')
-const morgan = require('morgan')
+const logs = require("./middlewares/requestLogs");
+const morgan = require("morgan");
 
 // Inicializaciones / Estancias
 const app = express();
 app.use(express.json());
 initModels();
-app.use(logs)
-app.use(morgan('tiny'))
+app.use(logs);
+app.use(morgan("tiny"));
 
 // Settings
 const PORT = process.env.PORT || 8000;
@@ -37,12 +37,17 @@ app.get(
   },
   (req, res, next) => {
     console.log("despues de hacer la peticion");
-    
   }
 );
 
 // Middlewares
 app.use("/api/v1", usersRouter);
+app.use((error, req, res, next) => {
+  res.status(400).json({
+    message: "ups something is wrong",
+    error: error.message
+  });
+});
 
 // Iniciar server
 app.listen(PORT, () => console.log(`Server is running at port: ${PORT}`));

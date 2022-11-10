@@ -45,7 +45,10 @@ const addUser = async (req, res, next) => {
     const result = await usersServices.add(newUser);
     res.status(201).json(result);
   } catch (error) {
-    next(error);
+    next({
+      status: 418,
+      errorContent: error,
+    });
   }
 };
 

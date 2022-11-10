@@ -5,6 +5,7 @@ const usersRouter = require("./routes/users.routes");
 require("dotenv").config();
 const logs = require("./middlewares/requestLogs");
 const morgan = require("morgan");
+const errorHandle = require("./middlewares/error");
 
 // Inicializaciones / Estancias
 const app = express();
@@ -42,12 +43,7 @@ app.get(
 
 // Middlewares
 app.use("/api/v1", usersRouter);
-app.use((error, req, res, next) => {
-  res.status(400).json({
-    message: "ups something is wrong",
-    error: error.message
-  });
-});
+app.use(errorHandle);
 
 // Iniciar server
 app.listen(PORT, () => console.log(`Server is running at port: ${PORT}`));
